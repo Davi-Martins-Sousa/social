@@ -5,7 +5,9 @@
 ?>
 
 <?php
-  session_start();
+  //error_reporting(E_ALL);
+  //session_start();
+  //var_dump($_SESSION);
   $usuario_id = $_SESSION['usuario_id'];
   $usuario_nome = $_SESSION['usuario_nome'];
 

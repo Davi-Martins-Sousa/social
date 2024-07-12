@@ -5,7 +5,7 @@
 ?>
 
 <?php
-    session_start();
+    //session_start();
     $usuario_id = $_SESSION['usuario_id'];
     $usuario_nome = $_SESSION['usuario_nome'];
     $id = $_GET['id'];
@@ -77,6 +77,8 @@
     
             if (mysqli_query($conexao, $query)) {
                 echo "Nova comentario inserida com sucesso!";
+                header('Location: comentarios.php?id=' . $id);
+                //exit;
             } else {
                 echo "Erro ao inserir a nova comentario: " . mysqli_error($conexao);
             }
@@ -87,5 +89,6 @@
         }
     }
 ?>
+
 
 <?php include("Rodape.php");?>

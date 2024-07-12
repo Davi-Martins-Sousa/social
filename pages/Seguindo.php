@@ -5,7 +5,7 @@
 ?>
 
 <?php
-  session_start();
+  //session_start();
   $usuario_id = $_SESSION['usuario_id'];
   $usuario_nome = $_SESSION['usuario_nome'];
 
