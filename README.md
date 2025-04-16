@@ -3,9 +3,11 @@
 # para desativar o mysql: sudo systemctl stop mysql
 
 # Requisitos
-#   -Uma rede social com GRUD de usuario
-#   -Com um feed onde aparece as publicações de todas as pessoas que o usuario segue
+#   -Uma rede social 
+#   -GRUD de usuario
+#   -Feed onde aparece as publicações de todas as pessoas que o usuario segue
 #   -Sistema de seguir e parar de seguir
-#   -Sistema de ver seguidores e quem se segue com a possibilidade de remove-los
+#   -Sistema de lista de seguidores e seguidos
+#   -Possibilidade de remover de seuidores e seguidos da lista de seguidores e da lista de seguidos
 #   -Barra de pesquisa por usuario
-#   -Sistema de comentario nas publicações
+#   -Sistema de comentario nas publicaçõesç
