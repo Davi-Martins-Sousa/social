@@ -1,0 +1,20 @@
+@startuml
+left to right direction
+actor "Usuário" as User
+&nbsp;
+&nbsp;
+
+User --> (Gerenciar Usuário (CRUD))
+User --> (Gerenciar Postagens (CRUD))
+User --> (Seguir / Parar de Seguir)
+User --> (Feed de Publicações)
+User --> (Lista de Seguidores)
+User --> (Lista de Seguidos)
+User --> (Remover Seguidores)
+User --> (Remover Seguidos)
+User --> (Barra de Pesquisa por Usuário)
+User --> (Comentar em Publicações)
+&nbsp;
+&nbsp;
+
+@enduml
