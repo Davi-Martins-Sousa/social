@@ -1,0 +1,47 @@
+@startuml
+' Direção do layout
+left to right direction
+
+' Classes principais
+class Usuario {
+    - id: int
+    - nome: string
+    - email: string
+    - senha: string
+    + seguir(usuario: Usuario)
+    + pararDeSeguir(usuario: Usuario)
+    + removerSeguidor(usuario: Usuario)
+    + removerSeguido(usuario: Usuario)
+    + pesquisarUsuario(nome: string): List<Usuario>
+}
+
+class Postagem {
+    - id: int
+    - conteudo: string
+    - dataCriacao: Date
+    - autor: Usuario
+    + editarPostagem(novoConteudo: string)
+    + deletarPostagem()
+}
+
+class Comentario {
+    - id: int
+    - conteudo: string
+    - dataCriacao: Date
+    - autor: Usuario
+    - postagem: Postagem
+}
+
+class Feed {
+    - usuario: Usuario
+    + obterPostagens(): List<Postagem>
+}
+
+' Relacionamentos
+Usuario "1" --> "*" Postagem : cria >
+Usuario "1" --> "*" Comentario : escreve >
+Usuario "1" --> "*" Usuario : segue >
+Postagem "1" --> "*" Comentario : recebe >
+Feed "1" --> "1" Usuario
+
+@enduml
