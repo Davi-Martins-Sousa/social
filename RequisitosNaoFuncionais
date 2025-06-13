@@ -1,0 +1,5 @@
+RNF01 – O sistema deve ter tempo de resposta inferior a 5 segundos para exibir o feed.
+RNF02 – O sistema deve criptografar senhas dos usuários no banco de dados.
+RNF03 – O sistema deve estar disponível 99,9% do tempo.
+RNF04 – O sistema deve ser acessível em navegadores modernos (Chrome, Firefox, Edge).
+RNF05 – O sistema deve suportar até 10.000 usuários simultâneos sem perda de desempenho.
