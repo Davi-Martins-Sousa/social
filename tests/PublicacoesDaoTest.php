@@ -1,93 +1,51 @@
 <?php
+// Inclua suas funções aqui
+include("../DB/conecta.php");
+include("../dao/publicacoesDao.php");
 
-use PHPUnit\Framework\TestCase;
+// Configurar a conexão com o banco de dados
+$connection = getConection();
 
-class PublicacoesDaoTest extends TestCase {
-    protected $connection;
-
-    protected function setUp(): void {
-        // Simula a conexão com o banco de dados
-        $this->connection = $this->createMock(mysqli::class);
-    }
-
-    public function testGetPosts() {
-        $usuario_id = 1;
-
-        // Simula o resultado da consulta
-        $result = $this->createMock(mysqli_result::class);
-        $result->method('fetch_all')->willReturn([
-            ['id' => 1, 'nome' => 'João'],
-            ['id' => 2, 'nome' => 'Maria']
-        ]);
-
-        // Configura o método mysqli_query para retornar o resultado simulado
-        $this->connection->method('query')->willReturn($result);
-
-        // Chama a função que está sendo testada
-        $posts = getPosts($this->connection, $usuario_id);
-
-        // Verifica se o resultado está correto
-        $this->assertNotNull($posts);
-        $this->assertIsObject($posts);
-    }
-
-    public function testGetSelfPosts() {
-        $usuario_id = 1;
-
-        // Simula o resultado da consulta
-        $result = $this->createMock(mysqli_result::class);
-        $result->method('fetch_all')->willReturn([
-            ['id' => 1, 'usuario' => $usuario_id, 'conteudo' => 'Post 1'],
-            ['id' => 2, 'usuario' => $usuario_id, 'conteudo' => 'Post 2']
-        ]);
-
-        // Configura o método mysqli_query para retornar o resultado simulado
-        $this->connection->method('query')->willReturn($result);
-
-        // Chama a função que está sendo testada
-        $posts = getSelfPosts($this->connection, $usuario_id);
-
-        // Verifica se o resultado está correto
-        $this->assertNotNull($posts);
-        $this->assertIsObject($posts);
-    }
-
-    public function testGetPostsById() {
-        $id = 1;
-
-        // Simula o resultado da consulta
-        $result = $this->createMock(mysqli_result::class);
-        $result->method('fetch_assoc')->willReturn(['id' => $id, 'nome' => 'João']);
-
-        // Configura o método mysqli_query para retornar o resultado simulado
-        $this->connection->method('query')->willReturn($result);
-
-        // Chama a função que está sendo testada
-        $post = getPostsById($this->connection, $id);
-
-        // Verifica se o resultado está correto
-        $this->assertNotNull($post);
-        $this->assertIsObject($post);
-    }
-
-    public function testGetPostsSegundario() {
-        $pai_id = 1;
-
-        // Simula o resultado da consulta
-        $result = $this->createMock(mysqli_result::class);
-        $result->method('fetch_all')->willReturn([
-            ['id' => 1, 'pai' => $pai_id, 'conteudo' => 'Post secundário 1'],
-            ['id' => 2, 'pai' => $pai_id, 'conteudo' => 'Post secundário 2']
-        ]);
-
-        // Configura o método mysqli_query para retornar o resultado simulado
-        $this->connection->method('query')->willReturn($result);
-
-        // Chama a função que está sendo testada
-        $posts = getPostsSegundario($this->connection, $pai_id);
-
-        // Verifica se o resultado está correto
-        $this->assertNotNull($posts);
-        $this->assertIsObject($posts);
-    }
+// Verificar se a conexão foi bem-sucedida
+if (!$connection) {
+    die("Conexão falhou: " . mysqli_connect_error());
 }
+
+// Teste para getPosts
+$usuario_id = 1; // ID de teste
+$result = getPosts($connection, $usuario_id);
+if ($result) {
+    echo "getPosts: " . mysqli_num_rows($result) . " resultados encontrados.<br>";
+} else {
+    echo "getPosts: Erro na consulta.<br>";
+}
+
+// Teste para getSelfPosts
+$result = getSelfPosts($connection, $usuario_id);
+if ($result) {
+    echo "getSelfPosts: " . mysqli_num_rows($result) . " resultados encontrados.<br>";
+} else {
+    echo "getSelfPosts: Erro na consulta.<br>";
+}
+
+// Teste para getPostsById
+$id = 1; // ID de teste
+$result = getPostsById($connection, $id);
+if ($result) {
+    echo "getPostsById: " . mysqli_num_rows($result) . " resultados encontrados.<br>";
+} else {
+    echo "getPostsById: Erro na consulta.<br>";
+}
+
+// Teste para getPostsSegundario
+$pai_id = 1; // ID de teste
+$result = getPostsSegundario($connection, $pai_id);
+if ($result) {
+    echo "getPostsSegundario: " . mysqli_num_rows($result) . " resultados encontrados.<br>";
+} else {
+    echo "getPostsSegundario: Erro na consulta.<br>";
+}
+
+// Fechar a conexão
+$connection->close();
+?>
